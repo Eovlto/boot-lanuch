@@ -1,5 +1,6 @@
 package com.mingyang.bootlaunch.entity;
 
+import lombok.Builder;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
@@ -12,6 +13,7 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Data
 @Slf4j
+@Builder
 public class LombokPojo {
     private String name;
     private Integer age;
