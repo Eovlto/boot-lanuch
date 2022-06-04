@@ -22,7 +22,6 @@ public class MixPropertySourceFactory extends DefaultPropertySourceFactory
 {
     @Override
     public PropertySource<?> createPropertySource(@Nullable String name, EncodedResource resource) throws IOException {
-//        return name != null ? new ResourcePropertySource(name, resource) : new ResourcePropertySource(resource);
         String sourceName = name != null ? name : resource.getResource().getFilename();
         if(sourceName != null && sourceName.endsWith(".yml") || sourceName.endsWith(".yaml")) {
             Properties properties = loadYaml(resource);

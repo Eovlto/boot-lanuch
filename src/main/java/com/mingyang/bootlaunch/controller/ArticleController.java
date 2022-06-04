@@ -1,77 +1,104 @@
 package com.mingyang.bootlaunch.controller;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.mingyang.bootlaunch.common.result.Result;
-import com.mingyang.bootlaunch.common.result.ResultCode;
 import com.mingyang.bootlaunch.entity.Article;
+import com.mingyang.bootlaunch.service.ArticleService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
+
 /**
- * @author: ymy
- * @program: boot-lanuch
- * @description:
- * @date: 2022/6/3 18:13
- * @version: 1.0
- */
+* (article)表控制层
+*
+* @author xxxxx
+*/
 @Api(tags = "文章接口")
-@Slf4j
 @RestController
+@RequestMapping("/article")
 public class ArticleController {
+    /**
+    * 服务对象
+    */
+    @Resource
+    private ArticleService articleService;
 
     /**
-     * 根据id查询文章
-     * @param id
-     * @return
-     */
-    @ApiOperation(value = "根据id查询文章")
-    @ApiImplicitParam(name = "id", value = "文章id", required = true, dataType = "Long")
-    @GetMapping("/article/{id}")
-    private Result getArticle(@PathVariable("id") Long id) {
-        Article article = new Article();
-        article.setId(id);
-        article.setTitle("title");
-        article.setContent("content");
-        log.info("article:{}", article);
-        return Result.success(article);
+    * 通过主键查询单条数据
+    *
+    * @param id 主键
+    * @return 单条数据
+    */
+    @ApiOperation("通过主键查询单条数据")
+    @ApiImplicitParam(name = "id", value = "文章表主键id", required = true, dataType = "Long")
+    @GetMapping("/{id}")
+    public Result selectOne(@PathVariable("id")Integer id) {
+        return Result.success(articleService.getById(id));
     }
 
     /**
-     * 新增一片文章
+     * 查询所有数据
+     * @return 所有数据
      */
-    @ApiOperation(value = "新增一片文章")
-    @ApiImplicitParam(name = "article", value = "文章实体", required = true, dataType = "Article")
-    @PostMapping("/article")
-    private Result addArticle(@RequestBody Article article){
-        log.info("article:{}", article);
-        return Result.success(article.getId());
-    }
-    /**
-     * 更新一片文章
-     */
-    @PutMapping("/article")
-    @ApiOperation(value = "更新一片文章")
-    @ApiImplicitParam(name = "article", value = "文章实体", required = true, dataType = "Article")
-    private Result updateArticle(@RequestBody Article article){
-        if(article.getId() == null){
-            return Result.failure(ResultCode.PARAM_ERROR);
-        }
-        log.info("article:{}", article);
-        return Result.success(article.getId());
+    @ApiOperation("查询所有数据")
+    @GetMapping("/all")
+    public Result selectAll() {
+        return Result.success(articleService.list());
     }
 
     /**
-     * 删除一片文章
-     * @param id
-     * @return
+     * 新增数据
+     * @param article 实体对象
+     * @return  Result 新增结果
      */
-    @DeleteMapping("/article/{id}")
-    @ApiOperation(value = "删除一片文章")
-    @ApiImplicitParam(name = "id", value = "文章id", required = true, dataType = "Long")
-    private Result deleteArticle(@PathVariable("id") Long id){
-        log.info("id:{}", id);
-        return Result.success();
+    @ApiOperation("新增数据")
+    @ApiImplicitParam(name = "article", value = "文章表实体对象", required = true, dataType = "Article")
+    @PostMapping("/add")
+    public Result insert(Article article) {
+        return Result.success(articleService.save(article));
+    }
+
+    /**
+     * 修改数据
+     * @param article 实体对象
+     * @return  Result 修改结果
+     */
+    @ApiOperation("修改数据")
+    @ApiImplicitParam(name = "article", value = "文章表实体对象", required = true, dataType = "Article")
+    @PutMapping("/update")
+    public Result update(Article article) {
+        return Result.success(articleService.updateById(article));
+    }
+
+    /**
+     * 删除数据
+     * @param id 主键
+     * @return  Result 删除结果
+     */
+    @ApiOperation("删除数据")
+    @ApiImplicitParam(name = "id", value = "文章表主键id", required = true, dataType = "Long")
+    @DeleteMapping("/delete/{id}")
+    public Result delete(@PathVariable("id")Integer id) {
+        return Result.success(articleService.removeById(id));
+    }
+
+    /**
+     * 分页查询数据
+     * @param page 当前页
+     * @param size 每页显示条数
+     * @return  Result 分页结果
+     */
+    @ApiOperation("分页查询数据")
+    @ApiImplicitParams({
+        @ApiImplicitParam(name = "page", value = "当前页", required = true, dataType = "Integer"),
+        @ApiImplicitParam(name = "size", value = "每页显示条数", required = true, dataType = "Integer")
+    })
+    @GetMapping("/page/{page}/{size}")
+    public Result page(@PathVariable("page")Integer page, @PathVariable("size")Integer size) {
+        return Result.success(articleService.page(new Page<Article>(page, size), null));
     }
 }
