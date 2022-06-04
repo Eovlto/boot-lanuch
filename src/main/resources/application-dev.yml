@@ -1,0 +1,14 @@
+server:
+  port: 9011
+
+
+spring:
+  jackson:
+    # 全局配置 json 时间格式
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+
+logging:
+  level:
+    com.mingyang.bootlaunch: INFO # 日志级别
+  config: classpath:logback-spring.xml

@@ -168,7 +168,7 @@
     <!-- 4. 最终的策略 -->
     <!-- 4.1 开发环境:打印控制台-->
     <springProfile name="dev">
-        <logger name="com.cms" level="info"/>
+        <logger name="com.mingyang" level="info"/>
         <root level="info">
             <appender-ref ref="CONSOLE" />
             <appender-ref ref="DEBUG_FILE" />
@@ -181,7 +181,7 @@
 
     <!-- 4.2 生产环境:输出到文档-->
     <springProfile name="pro">
-        <logger name="com.cms" level="warn"/>
+        <logger name="com.mingyang" level="warn"/>
         <root level="info">
             <appender-ref ref="ERROR_FILE" />
             <appender-ref ref="WARN_FILE" />
