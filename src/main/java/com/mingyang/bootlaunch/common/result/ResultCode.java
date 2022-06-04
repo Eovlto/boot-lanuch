@@ -1,4 +1,4 @@
-package com.mingyang.bootlaunch.common;
+package com.mingyang.bootlaunch.common.result;
 
 import lombok.Data;
 import lombok.Getter;

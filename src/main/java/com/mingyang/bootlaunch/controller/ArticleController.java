@@ -1,7 +1,7 @@
 package com.mingyang.bootlaunch.controller;
 
-import com.mingyang.bootlaunch.common.Result;
-import com.mingyang.bootlaunch.common.ResultCode;
+import com.mingyang.bootlaunch.common.result.Result;
+import com.mingyang.bootlaunch.common.result.ResultCode;
 import com.mingyang.bootlaunch.entity.Article;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
