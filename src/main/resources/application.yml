@@ -1,2 +1,9 @@
 server:
   port: 9011
+
+
+spring:
+  jackson:
+    # 全局配置 json 时间格式
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
