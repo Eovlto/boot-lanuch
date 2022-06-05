@@ -8,6 +8,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -58,7 +59,7 @@ public class ArticleController {
     @ApiOperation("新增数据")
     @ApiImplicitParam(name = "article", value = "文章表实体对象", required = true, dataType = "Article")
     @PostMapping("/add")
-    public Result insert(Article article) {
+    public Result insert(@RequestBody Article article) {
         return Result.success(articleService.save(article));
     }
 
@@ -70,7 +71,7 @@ public class ArticleController {
     @ApiOperation("修改数据")
     @ApiImplicitParam(name = "article", value = "文章表实体对象", required = true, dataType = "Article")
     @PutMapping("/update")
-    public Result update(Article article) {
+    public Result update(@RequestBody Article article) {
         return Result.success(articleService.updateById(article));
     }
 
