@@ -180,7 +180,7 @@
 
 
     <!-- 4.2 生产环境:输出到文档-->
-    <springProfile name="pro">
+    <springProfile name="prod">
         <logger name="com.mingyang" level="warn"/>
         <root level="info">
             <appender-ref ref="ERROR_FILE" />
