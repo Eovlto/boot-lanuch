@@ -8,7 +8,6 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -36,7 +35,7 @@ public class ArticleController {
     */
     @ApiOperation("通过主键查询单条数据")
     @ApiImplicitParam(name = "id", value = "文章表主键id", required = true, dataType = "Long")
-    @GetMapping("/{id}")
+    @GetMapping(value = "/{id}",produces = {"application/json;charset=UTF-8"})
     public Result selectOne(@PathVariable("id")Integer id) {
         return Result.success(articleService.getById(id));
     }
@@ -58,7 +57,7 @@ public class ArticleController {
      */
     @ApiOperation("新增数据")
     @ApiImplicitParam(name = "article", value = "文章表实体对象", required = true, dataType = "Article")
-    @PostMapping("/add")
+    @PostMapping(value = "/add",produces = {"application/json;charset=UTF-8"})
     public Result insert(@RequestBody Article article) {
         return Result.success(articleService.save(article));
     }
@@ -70,7 +69,7 @@ public class ArticleController {
      */
     @ApiOperation("修改数据")
     @ApiImplicitParam(name = "article", value = "文章表实体对象", required = true, dataType = "Article")
-    @PutMapping("/update")
+    @PutMapping(value = "/update",produces = {"application/json;charset=UTF-8"})
     public Result update(@RequestBody Article article) {
         return Result.success(articleService.updateById(article));
     }
@@ -82,7 +81,7 @@ public class ArticleController {
      */
     @ApiOperation("删除数据")
     @ApiImplicitParam(name = "id", value = "文章表主键id", required = true, dataType = "Long")
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping(value = "/delete/{id}",produces = {"application/json;charset=UTF-8"})
     public Result delete(@PathVariable("id")Integer id) {
         return Result.success(articleService.removeById(id));
     }
@@ -98,7 +97,7 @@ public class ArticleController {
         @ApiImplicitParam(name = "page", value = "当前页", required = true, dataType = "Integer"),
         @ApiImplicitParam(name = "size", value = "每页显示条数", required = true, dataType = "Integer")
     })
-    @GetMapping("/page/{page}/{size}")
+    @GetMapping(value = "/page/{page}/{size}",produces = {"application/json;charset=UTF-8"})
     public Result page(@PathVariable("page")Integer page, @PathVariable("size")Integer size) {
         return Result.success(articleService.page(new Page<Article>(page, size), null));
     }
