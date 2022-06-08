@@ -17,6 +17,22 @@ spring:
     user:
       name: admin
       password: admin
+# redis
+  redis:
+    host: 192.168.17.131
+    port: 6379
+    password: root
+    database: 0
+    timeout: 10000s
+    lettuce:
+      pool:
+        max-active: 8
+        max-wait: -1
+        max-idle: 8
+        min-idle: 0
+  cache:
+    type: redis
+
 # http://localhost:9012/management/actuator/mappings
 # http://localhost:9012/management/actuator/beans
 management:

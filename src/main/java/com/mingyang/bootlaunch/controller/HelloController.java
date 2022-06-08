@@ -1,9 +1,13 @@
 package com.mingyang.bootlaunch.controller;
 
+import com.mingyang.bootlaunch.common.utils.RedisTool;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.annotation.Resource;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author: ymy
@@ -16,6 +20,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class HelloController {
 
+    @Resource
+    private RedisTool redisUtil;
     /**
      * hello
      * @param name
@@ -24,6 +30,13 @@ public class HelloController {
     @GetMapping("/hello")
     @ApiOperation("hello")
     public String hello(String name) {
+        redisUtil.set("name", name, TimeUnit.SECONDS.toSeconds(10));
         return "hello haha :"+ name;
+    }
+
+    @GetMapping("/getCache")
+    @ApiOperation("getCache")
+    public String getCache() {
+        return redisUtil.get("name").toString();
     }
 }
