@@ -3,7 +3,6 @@ server:
   servlet:
     context-path: /boot-lanuch
 
-
 spring:
   jackson:
     # 全局配置 json 时间格式
@@ -14,6 +13,24 @@ spring:
     username: root
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
+  security:
+    user:
+      name: admin
+      password: admin
+# http://localhost:9012/management/actuator/mappings
+# http://localhost:9012/management/actuator/beans
+management:
+  server:
+    port: 9012
+    servlet:
+      context-path: /management
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: '*'
 
 mybatis-plus:
   mapper-locations: classpath:mapper/*.xml
