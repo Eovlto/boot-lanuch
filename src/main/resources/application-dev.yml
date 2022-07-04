@@ -32,6 +32,10 @@ spring:
         min-idle: 0
   cache:
     type: redis
+  mail:
+    host: smtp.exmail.qq.com
+    port: 465
+    username: yumingyang@anano.top
 
 # http://localhost:9012/management/actuator/mappings
 # http://localhost:9012/management/actuator/beans
