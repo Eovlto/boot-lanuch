@@ -9,7 +9,7 @@ spring:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
   datasource:
-    url: jdbc:mysql://192.168.17.131:3306/launch?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://192.168.17.134:3306/launch?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai
     username: root
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -19,7 +19,7 @@ spring:
       password: admin
 # redis
   redis:
-    host: 192.168.17.131
+    host: 192.168.17.134
     port: 6379
     password: root
     database: 0
