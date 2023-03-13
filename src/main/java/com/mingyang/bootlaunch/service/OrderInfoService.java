@@ -12,4 +12,6 @@ public interface OrderInfoService extends IService<OrderInfo> {
     OrderInfo createOrderByProductId(Long productId);
 
     void updateStatusByOrderNo(String orderNo, String success);
+
+    String getOrderStatus(String orderNo);
 }

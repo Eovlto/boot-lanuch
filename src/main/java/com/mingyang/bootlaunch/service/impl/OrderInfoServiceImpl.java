@@ -68,6 +68,17 @@ public class OrderInfoServiceImpl extends ServiceImpl<OrderInfoMapper, OrderInfo
         this.update(wrapper);
     }
 
+    @Override
+    public String getOrderStatus(String orderNo) {
+        QueryWrapper<OrderInfo> wrapper = new QueryWrapper<>();
+        wrapper.lambda().eq(OrderInfo::getOrderNo,orderNo);
+        OrderInfo orderInfo = baseMapper.selectOne(wrapper);
+        if (orderInfo == null) {
+            return null;
+        }
+        return orderInfo.getOrderStatus();
+    }
+
     private OrderInfo getNoPayOrderByProductId(Long productId) {
         QueryWrapper<OrderInfo> wrapper = new QueryWrapper<>();
         wrapper.lambda().eq(OrderInfo::getProductId,productId)

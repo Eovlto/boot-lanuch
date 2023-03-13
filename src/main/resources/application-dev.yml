@@ -1,7 +1,7 @@
 server:
   port: 9011
   servlet:
-    context-path: /boot-lanuch
+    context-path: /
 
 spring:
   jackson:
@@ -9,19 +9,38 @@ spring:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
   datasource:
-    url: jdbc:mysql://192.168.17.134:3306/launch?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://119.3.150.136:3306/sharedprint?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai
     username: root
-    password: root
+    password: 12345Asdfg
     driver-class-name: com.mysql.cj.jdbc.Driver
-  security:
-    user:
-      name: admin
-      password: admin
-# redis
+    hikari:
+      # 连接池名
+      pool-name: dateHikariPool
+      # 最小空闲连接出
+      minimum-idle: 5
+      # 空闲连接存活最大时间, 默认60000(10分钟)
+      idle-timeout: 1800000
+      # 最大连接数, 默认10
+      maximum-pool-size: 10
+      # 从连接池返回的连接自动提交
+      auto-commit: true
+      # 连接存活时间, 0 表示永久存活, 默认1800000(30分钟)
+      max-lifetime: 1800000
+      # 连接超时时间, 默认30000(30秒)
+      connection-timeout: 30000
+      # 测试连接是否可用的查询语句
+      connection-test-query: SELECT 1
+  #  security:
+#    user:
+#      name: admin
+#      password: admin
+  thymeleaf:
+    cache: false
+  # redis
   redis:
-    host: 192.168.17.134
+    host: 127.0.0.1
     port: 6379
-    password: root
+    password:
     database: 0
     timeout: 10000s
     lettuce:
@@ -32,25 +51,6 @@ spring:
         min-idle: 0
   cache:
     type: redis
-  mail:
-    host: smtp.exmail.qq.com
-    port: 465
-    username: yumingyang@anano.top
-
-# http://localhost:9012/management/actuator/mappings
-# http://localhost:9012/management/actuator/beans
-management:
-  server:
-    port: 9012
-    servlet:
-      context-path: /management
-  endpoint:
-    health:
-      show-details: always
-  endpoints:
-    web:
-      exposure:
-        include: '*'
 
 mybatis-plus:
   mapper-locations: classpath:mapper/*.xml
